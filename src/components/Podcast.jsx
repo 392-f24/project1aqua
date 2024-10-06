@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import Player from './Player';
 
 const Podcast = () => {
   const { category } = useParams(); // Extract the category from the URL parameters
@@ -12,6 +13,7 @@ const Podcast = () => {
         <p className="text-center text-gray-700">
           This is a {category} podcast.
         </p>
+        <div><Player /></div>
       </div>
     </div>
   );
