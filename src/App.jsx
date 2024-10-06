@@ -7,7 +7,7 @@ import Podcast from './components/Podcast';
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="min-h-screen bg-red-300 p-4">
         <Routes>
           {/* Login */}
           <Route path="/" element={<Login />} />
