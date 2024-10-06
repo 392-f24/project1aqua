@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { storage } from './firebaseConfig';  // Import storage from your Firebase config file
 
-const DownloadImage = () => {
+const StorageTester = () => {
   const [imageUrl, setImageUrl] = useState(null);  // State to store the downloaded image URL
 
   const handleDownload = async () => {
@@ -32,4 +32,4 @@ const DownloadImage = () => {
   );
 };
 
-export default DownloadImage;
+export default StorageTester;
