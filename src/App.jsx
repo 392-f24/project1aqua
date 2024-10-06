@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './components/Login';
-import Category from './components/Category';
-import Podcast from './components/Podcast';  
+import Login from "./components/Login";
+import Category from "./components/Category";
+import Podcast from "./components/Podcast";
 
 function App() {
   return (
@@ -15,12 +15,13 @@ function App() {
           {/* Category */}
           <Route path="/category" element={<Category />} />
 
-          {/* Podcast */}
-          <Route path="/podcast/sports" element={<Podcast />} />
+          {/* Dynamic Podcast Route */}
+          <Route path="/podcast/:category" element={<Podcast />} />
         </Routes>
       </div>
     </Router>
   );
 }
+
 
 export default App;
