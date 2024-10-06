@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from "./components/Login";
 import Category from "./components/Category";
 import Podcast from "./components/Podcast";
+import StorageTester from "./components/storageTester";
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
 
           {/* Dynamic Podcast Route */}
           <Route path="/podcast/:category" element={<Podcast />} />
+
+          {/* Storage Tester */}
+          <Route path="/storageTester" element={<StorageTester />} />
         </Routes>
       </div>
     </Router>
