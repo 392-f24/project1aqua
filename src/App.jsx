@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import Category from "./components/Category";
 import Podcast from "./components/Podcast";
 import StorageTester from "./components/storageTester";
+import DatabaseTester from './components/databseTester';
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
 
           {/* Storage Tester */}
           <Route path="/storageTester" element={<StorageTester />} />
+
+          {/* Database Tester */}
+          <Route path="/databaseTester" element={<DatabaseTester />} />
         </Routes>
       </div>
     </Router>
