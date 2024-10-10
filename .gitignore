@@ -1,5 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/react,firebase,visualstudiocode,macos,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=react,firebase,visualstudiocode,macos,windows
+
+### Firebase Config ###
+.env
+
 ### Firebase ###
 .idea
 **/node_modules/*
