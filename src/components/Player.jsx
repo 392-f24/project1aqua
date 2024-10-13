@@ -46,51 +46,39 @@ const Player = ({ category }) => {
 
           setAudioUrl(mp3_url);
           setSummaryUrl(summary_url);
-          audioRef.current = new Audio(mp3_url); 
-
-          console.log('Audio URL:', mp3_url);
-          console.log('Summary URL:', summary_url);
-
+          // Initialize audio only if it is not already initialized
+          if (!audioRef.current) {
+            audioRef.current = new Audio(mp3_url);
+            audioRef.current.addEventListener('loadedmetadata', () => {
+              setDuration(audioRef.current.duration);
+            });
+            audioRef.current.addEventListener('timeupdate', () => {
+              const progressPercentage = (audioRef.current.currentTime / audioRef.current.duration) * 100;
+              setProgress(progressPercentage);
+            });
+          } else {
+            audioRef.current.src = mp3_url; // Change the source if the audio already exists
+          }
         }
-        else {
-          console.log("Error fetching podcasts, no relevant podcasts found")
-        }
-      }
-      catch(err) {
+      } catch (err) {
         console.error('Error fetching the podcast:', err);
       }
     };
 
-    // call function
     fetchMostRecentPodcast();
+
+    // Cleanup function to stop audio
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause(); // Stop audio playback
+        audioRef.current.src = ''; // Reset the source
+        audioRef.current.load(); // Load the audio element to reset
+        console.log("Cleanup function called: Audio paused"); // Debugging log
+        setIsPlaying(false); // Update play state
+      }
+    };
   }, [category]);
 
-
-   // Setup audio events on page load
-   useEffect(() => {
-    if (audioRef.current) {
-      const audio = audioRef.current;
-
-      const updateProgress = () => {
-        const progressPercentage = (audio.currentTime / audio.duration) * 100;
-        setProgress(progressPercentage);
-      };
-
-      const setAudioData = () => {
-        setDuration(audio.duration);
-      };
-
-      // Attach the 'timeupdate' event listener to update progress bar
-      audio.addEventListener('timeupdate', updateProgress);
-      audio.addEventListener('loadedmetadata', setAudioData); // Load duration when audio metadata is available
-
-      // Cleanup event listener when component unmounts
-      return () => {
-        audio.removeEventListener('timeupdate', updateProgress);
-        audio.removeEventListener('loadedmetadata', setAudioData);
-      };
-    }
-  }, [audioUrl]); // Only after audioUrl is set
 
   const togglePlayPause = () => {
     const audio = audioRef.current;
