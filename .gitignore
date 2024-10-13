@@ -12,6 +12,10 @@
 .runtimeconfig.json
 .firebase/
 
+### Service Account Key ###
+serviceAccountKey.json
+
+
 ### macOS ###
 # General
 .DS_Store
