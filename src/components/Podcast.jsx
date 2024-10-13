@@ -13,7 +13,10 @@ const Podcast = () => {
         <p className="text-center text-gray-700">
           This is a {category} podcast.
         </p>
-        <div><Player /></div>
+        <div>
+          <Player 
+          category={category}/>
+        </div>
       </div>
     </div>
   );

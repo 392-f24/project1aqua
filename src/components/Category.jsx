@@ -5,19 +5,19 @@ const Category = () => {
   const navigate = useNavigate();  // Initialize the navigation hook
 
   const handleSportsClick = () => {
-    navigate('/podcast/sports');  // Redirect to the Sports Podcast page
+    navigate('/podcast/Sports');  // Redirect to the Sports Podcast page
   };
 
   const handleTechnologyClick = () => {
-    navigate('/podcast/technology');
+    navigate('/podcast/Technology');
   };
 
   const handleMusicClick = () => {
-    navigate('/podcast/music');
+    navigate('/podcast/Music');
   };
 
   const handleNewsClick = () => {
-    navigate('/podcast/news');
+    navigate('/podcast/News');
   };
 
   return (
