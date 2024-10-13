@@ -4,7 +4,7 @@ import Login from "./components/Login";
 import Category from "./components/Category";
 import Podcast from "./components/Podcast";
 import StorageTester from "./components/storageTester";
-import DatabaseTester from './components/databseTester';
+import DatabaseTester from './components/databaseTester';
 
 function App() {
   return (
