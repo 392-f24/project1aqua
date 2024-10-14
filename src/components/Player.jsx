@@ -10,7 +10,7 @@ const Player = ({ category }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0); // To store the duration of the audio
-  const [audioUrl, setAudioUrl] = useState('/combined_audio.mp3'); // Set default if no URL
+  const [audioUrl, setAudioUrl] = useState(null); // Set default if no URL
   const audioRef = useRef(null); 
 
   // get most recent podcast in {category}
@@ -18,9 +18,7 @@ const Player = ({ category }) => {
     const fetchMostRecentPodcast = async () => {
       try {
         const rootRef = ref(storage, ''); 
-        console.log(rootRef );
         const all_buckets = await listAll(rootRef ); // list all files in root
-        console.log(all_buckets);
 
         const matchingFiles = all_buckets.prefixes.filter((prefix) =>
           prefix.name.startsWith(category) && /\d{4}_\d{2}_\d{2}_\d{2}_\d{2}_\d{2}/.test(prefix.name)
@@ -34,9 +32,7 @@ const Player = ({ category }) => {
         });
 
         if (sortedFiles.length > 0) {
-          console.log(sortedFiles);
           const mostRecentFile = sortedFiles[0];
-          console.log(mostRecentFile);
           // get podcast and summary download urls
           const podcastFile = ref(storage, `${mostRecentFile.fullPath}/combined_audio.mp3`);
           const mp3_url = await getDownloadURL(podcastFile);
@@ -52,10 +48,6 @@ const Player = ({ category }) => {
             audioRef.current.addEventListener('loadedmetadata', () => {
               setDuration(audioRef.current.duration);
             });
-            audioRef.current.addEventListener('timeupdate', () => {
-              const progressPercentage = (audioRef.current.currentTime / audioRef.current.duration) * 100;
-              setProgress(progressPercentage);
-            });
           } else {
             audioRef.current.src = mp3_url; // Change the source if the audio already exists
           }
@@ -64,12 +56,15 @@ const Player = ({ category }) => {
         console.error('Error fetching the podcast:', err);
       }
     };
-
     fetchMostRecentPodcast();
 
     // Cleanup function to stop audio
     return () => {
       if (audioRef.current) {
+        audioRef.current.removeEventListener('loadedmetadata', () => {
+          setDuration(audioRef.current.duration);
+        });
+        
         audioRef.current.pause(); // Stop audio playback
         audioRef.current.src = ''; // Reset the source
         audioRef.current.load(); // Load the audio element to reset
@@ -90,15 +85,39 @@ const Player = ({ category }) => {
     setIsPlaying(!isPlaying);
   };
 
-
-  // Handle manual progress bar change
+  useEffect(() => {
+    if (audioRef.current) {
+      const audio = audioRef.current;
+  
+      // Update progress bar as the audio plays
+      const updateProgress = () => {
+        if (!isNaN(audio.duration)) {
+          const progressPercentage = (audio.currentTime / audio.duration) * 100;
+          setProgress(progressPercentage);
+        } else {
+          setProgress(0); // Default progress to 0 when duration is not available
+        }
+      };
+  
+      // Add event listener for time update
+      audio.addEventListener('timeupdate', updateProgress);
+      // Cleanup function to remove event listener when component unmounts or audioUrl changes
+      return () => {
+        audio.removeEventListener('timeupdate', updateProgress);
+      };
+    }
+  }, [audioUrl]);
+  
+  // Handle manual progress bar change (seeking)
   const handleProgressChange = (event) => {
     const audio = audioRef.current;
-    const newTime = (event.target.value / 100) * audio.duration;
-    audio.currentTime = newTime;
-    setProgress(event.target.value);
+    const newProgress = event.target.value; // Get the new progress percentage from the slider
+    setProgress(newProgress); // Update the progress state
+  
+    // Calculate the new current time based on the progress percentage
+    const newTime = (newProgress / 100) * audio.duration;
+    audio.currentTime = newTime; // Set the new current time in the audio
   };
-
 
   return (
   <div>
