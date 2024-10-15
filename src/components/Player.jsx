@@ -121,7 +121,7 @@ const Player = ({ category }) => {
 
   return (
   <div>
-    <div className="flex flex-col items-center p-6 bg-gray-800 rounded-xl shadow-lg w-full max-w-md mt-6">
+    <div className="flex flex-col items-center p-6 bg-gray-800 rounded-xl shadow-lg w-full mt-6">
       {/* Play/Pause Button */}
       <button
         onClick={togglePlayPause}
