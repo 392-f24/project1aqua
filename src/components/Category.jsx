@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';  // Import useNavigate
+import SignOutNav from './SignOutNav';
 
 const Category = () => {
   const navigate = useNavigate();  // Initialize the navigation hook
@@ -21,7 +22,9 @@ const Category = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+    <div className="flex flex-col min-h-screen bg-gray-100">
+      <SignOutNav /> {/* This will now be at the top */}
+      <div className="flex-grow flex flex-col items-center justify-center">
       <h2 className="text-2xl font-semibold mb-6">Select the Podcast Category</h2>
       <div className="flex flex-wrap gap-4 justify-center">
         <button
@@ -49,6 +52,7 @@ const Category = () => {
           News
         </button>
       </div>
+    </div>
     </div>
   );
 };
