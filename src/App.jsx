@@ -5,6 +5,7 @@ import Category from "./components/Category";
 import Podcast from "./components/Podcast";
 import StorageTester from "./components/storageTester";
 import DatabaseTester from './components/databaseTester';
+import SignInOut from './components/SignInOut';
 
 function App() {
   return (
@@ -12,8 +13,9 @@ function App() {
       <div className="min-h-screen bg-red-300 p-4">
         <Routes>
           {/* Login */}
-          <Route path="/" element={<Login />} />
-          
+          {/* <Route path="/" element={<Login />} />*/}
+          <Route path="/" element={<SignInOut />} />
+
           {/* Category */}
           <Route path="/category" element={<Category />} />
 
@@ -25,6 +27,9 @@ function App() {
 
           {/* Database Tester */}
           <Route path="/databaseTester" element={<DatabaseTester />} />
+
+          
+
         </Routes>
       </div>
     </Router>
