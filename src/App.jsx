@@ -10,7 +10,7 @@ import SignInOut from './components/SignInOut';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-red-300 p-4">
+      <div className="min-h-screen">
         <Routes>
           {/* Login */}
           {/* <Route path="/" element={<Login />} />*/}
