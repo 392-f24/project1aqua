@@ -10,7 +10,12 @@
       {
         "source": "**",
         "destination": "/index.html"
+      },
+      {
+        "source": "/summary.txt",
+        "destination": "https://firebasestorage.googleapis.com/v0/b/flashbrief-e6852.appspot.com/o/Technology_2024_10_12_18_23_05%2Fsummary.txt?alt=media&token=4cc19c64-d43a-442e-bf61-1fc88fbbc265"
       }
+      
     ]
   },
   "database": {
