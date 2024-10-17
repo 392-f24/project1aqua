@@ -10,12 +10,9 @@ const Podcast = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       <SignOutNav />
-      <div className="flex-grow flex items-center justify-center p-4">
+      <div className="flex-grow flex items-center justify-center p-4 bg-gray-800">
         <div className="w-full max-w-lg p-8">
-          <h2 className="text-2xl font-semibold text-center mb-4">{category} Podcast</h2>
-          <p className="text-center text-gray-700 mb-6">
-            This is a {category} podcast.
-          </p>
+          <h2 className="text-2xl font-semibold text-white text-center mb-4">{category} Podcast</h2>
           <div className="flex justify-center">
             <Player category={category} />
           </div>

@@ -18,20 +18,19 @@ export default function Summary({ summaryUrl }) {
                 setSummaryContent(text);
             }
             catch (err) {
-                console.log(`Error: ${err}`)
+                console.log(`Error: ${err}`);
             }
         };
         fetchSummary();
     }, [summaryUrl]);
 
     return (
-    <div>
-        <h3>Summary:</h3>
+    <div className='pt-6'>
         {/* Conditional rendering based on error state */}
         {error ? (
                 <p>No summary available.</p> // Display the error message
             ) : (
-                <p>{summaryContent}</p> // Display the fetched content
+                <p className='text-white text-2l'>{summaryContent}</p> // Display the fetched content
             )}
     </div>
     )

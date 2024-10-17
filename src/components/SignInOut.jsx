@@ -114,13 +114,7 @@ const SignInOut = () => {
 
     return (
         <div className="flex items-center justify-center min-h-screen">
-            {user ? (
-                <div className="w-full max-w-sm bg-white rounded-lg shadow-md p-8">
-                    <h1>Welcome, {user.displayName}</h1>
-                </div>
-            ) : (
-                <SignInForm />
-            )}
+            <SignInForm />
         </div>
     );
 };
