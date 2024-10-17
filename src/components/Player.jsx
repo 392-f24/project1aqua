@@ -121,11 +121,11 @@ const Player = ({ category }) => {
 
   return (
   <div>
-    <div className="flex flex-col items-center p-6 bg-gray-800 rounded-xl shadow-lg w-full mt-6">
+    <div className="flex flex-col items-center p-6 rounded-xl shadow-lg w-full mt-6 bg-gray-600">
       {/* Play/Pause Button */}
       <button
         onClick={togglePlayPause}
-        className="mb-4 p-4 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="mb-4 p-4 bg-gray-600 text-white rounded-full hover:bg-gray-900 transition duration-600 focus:outline-none focus:ring-2 focus:ring-gray-900"
       >
         {isPlaying ? (
           <i className="fa-regular fa-circle-pause text-3xl"></i>
@@ -142,7 +142,7 @@ const Player = ({ category }) => {
           max="100"
           value={progress}
           onChange={handleProgressChange}
-          className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
+          className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-white"
         />
         {/* Progress Time */}
         <div className="flex justify-between mt-2 text-sm text-gray-300">

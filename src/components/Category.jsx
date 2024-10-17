@@ -24,29 +24,34 @@ const Category = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       <SignOutNav /> {/* This will now be at the top */}
-      <div className="flex-grow flex flex-col items-center justify-center">
-      <h2 className="text-2xl font-semibold mb-6">Select the Podcast Category</h2>
+      <div className="flex-grow flex flex-col items-center justify-center" 
+      style ={{backgroundColor:'#5f6f52'}}>
+      <h2 className="text-3xl font-semibold mb-6">Choose a Podcast Category</h2>
       <div className="flex flex-wrap gap-4 justify-center">
         <button
-          className="px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
+          className="px-6 py-3 text-black rounded-md hover:bg-blue-600 transition"
+          style={{ backgroundColor: '#fefae0' }}
           onClick={handleSportsClick}
         >
           Sports
         </button>
         <button
-          className="px-6 py-3 bg-green-500 text-white rounded-md hover:bg-green-600 transition"
+          className="px-6 py-3 text-black rounded-md hover:bg-green-600 transition"
+          style={{ backgroundColor: '#fefae0' }}
           onClick={handleTechnologyClick}
         >
           Technology
         </button>
         <button
-          className="px-6 py-3 bg-purple-500 text-white rounded-md hover:bg-purple-600 transition"
+          className="px-6 py-3 text-black rounded-md hover:bg-purple-600 transition"
+          style={{ backgroundColor: '#fefae0' }}
           onClick={handleMusicClick}
         >
           Music
         </button>
         <button
-          className="px-6 py-3 bg-red-500 text-white rounded-md hover:bg-red-600 transition"
+          className="px-6 py-3 text-black rounded-md hover:bg-red-600 transition"
+          style={{ backgroundColor: '#fefae0' }}
           onClick={handleNewsClick}
         >
           News

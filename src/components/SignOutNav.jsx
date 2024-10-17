@@ -43,5 +43,5 @@ export default function SignOutNav() {
             <h1 className="text-lg font-bold">FlashBrief</h1> {/* Title or Logo */}
             <AuthButton />
         </div>
-);
+  );
 }
