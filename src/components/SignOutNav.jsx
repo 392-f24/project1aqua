@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const SignOutButton = () => (
     <button
-    className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition"
+    className="btn bg-gray-700 text-white py-2 px-4 rounded-md hover:bg-red-600 transition"
     onClick={signOut}
     >
       Sign Out
@@ -23,7 +23,7 @@ const SignInButton = () => {
     
     return (
         <button
-          className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition"
+          className="btn bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-red-600 transition"
           onClick={handleSignIn}
         >
           Sign In
