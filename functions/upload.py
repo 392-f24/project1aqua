@@ -25,9 +25,9 @@ def upload_file_to_firebase(local_path, firebase_path):
         print(f"Error uploading {local_path}: {e}")
 
 def main(directory):
-    """Upload only 'combined_audio.mp3' and 'summary.txt' from the given directory."""
+    """Upload only 'combined_audio.mp3' 'smallsummary.txt' 'summary.txt' from the given directory."""
     # File names to upload
-    files_to_upload = ['combined_audio.mp3', 'summary.txt']
+    files_to_upload = ['combined_audio.mp3', 'summary.txt', 'smallsummary.txt']
 
     # Extract the base directory name to use as the Firebase directory
     base_dir_name = os.path.basename(os.path.normpath(directory))

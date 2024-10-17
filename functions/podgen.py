@@ -31,7 +31,7 @@ def fetch_articles(query, from_date, api_key, num_articles):
     params = {
         'q': query,
         'from': from_date,
-        'sortBy': 'popularity',
+        'sortBy': 'relevancy',
         'pageSize': num_articles,
         'apiKey': api_key
     }
@@ -77,7 +77,7 @@ def convert_html_to_text():
 
 # Step 6: Function to send text to GPT-4o-mini API and receive a response
 def ask_gpt(text, query):
-    prompt = f"Is the following article very relevant to the search keyword of '{query}'? If so, reply only with YES. If not, reply only with NO. \n\n{text}"
+    prompt = f"Is the following article NOT an advertisement for a product or service, very interesting and relevant to the search keyword of '{query}'? If so, reply only with YES. If not, reply only with NO. Be extremely selective, only choosing big news.\n\n{text}"
     try:
         response = openai.ChatCompletion.create(
             model="gpt-4o-mini",
@@ -108,7 +108,7 @@ def check_relevance_and_move_files(query):
 
 # Step 8: Generate summaries for relevant articles
 def generate_summary(text):
-    prompt = f"Summarize the following article in a concise manner:\n\n{text}"
+    prompt = f"Summarize the following article in a concise manner, including all relevant details:\n\n{text}"
     try:
         response = openai.ChatCompletion.create(
             model="gpt-4o-mini",
@@ -152,18 +152,18 @@ def aggregate_summaries():
     return aggregated_text.strip()
 
 # Step 11: Generate podcast script using GPT-4o-mini
-def generate_podcast_script(aggregated_summaries):
+def generate_podcast_script(aggregated_summaries, query):
     prompt = f"""
-    Welcome to Flash Briefs' Daily Tech Recap! Today, we're diving into the latest and greatest from the tech world, covering everything from game-changing innovations to surprising updates! Here are the top tech stories of the day:
+    Welcome to Flash Briefs' Daily '{query}' Recap! Today, we're diving into the latest and greatest from the '{query}' world! Here are the top '{query}' stories of the day:
 
     {aggregated_summaries}
 
-    Now, I want you to create a 5-minute podcast script based on these summaries. Give the users a warm welcome from flash news! Take your time reading through all the tech news, being sure to discuss each point, and arrange your points in a thoughtful manner, elaborating on each engagingly clearly describing impact or utility. The script should be thorough, playful, engaging, and entertaining. Make sure it feels like a warm conversation with the listeners. Add some light humor, enthusiasm, and a friendly tone. Let's keep the energy up and make tech news fun! The script will only contain readable content, ABSOLUTELY NO additional notes or effects, jingles, transitions, songs, or notes about who is speaking. Just the words to be read on teleprompter.
+    Now, I want you to create a 5-minute podcast script based on these summaries. Give the users a warm welcome from Flash Brief! Take your time reading through all the news, being sure to discuss each point, and arrange your points in a thoughtful manner, elaborating on each engagingly clearly with the subject matter. The script should be thorough, playful, engaging, and entertaining. Make sure it feels like a warm conversation with the listeners. Add some light humor, enthusiasm, and a friendly tone. Let's keep the energy up and make news fun! The script will only contain readable content, ABSOLUTELY NO additional notes or effects, jingles, transitions, songs, or notes about who is speaking. Just the words in English to be read on a teleprompter. Do not cover any information that is about a product or service unless it is absolutely groundbreaking and paradigm shifting.
     """
     
     try:
         response = openai.ChatCompletion.create(
-            model="gpt-4o-mini",
+            model="gpt-4o",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant. Answer with as many words as possible!"},
                 {"role": "user", "content": prompt}
@@ -182,7 +182,53 @@ def save_podcast_script(script):
         script_file.write(script)
     print(f"Podcast script generated and saved to {podcast_script_path}")
 
-# Step 13: Split podcast script into chunks
+# Step 13: Summarize podcast script
+def summarize_podcast_script(script):
+    prompt = f"Summarize the following podcast script in a concise manner:\n\n{script}"
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=1500  # Adjust token limit based on how long you'd like the summary to be
+        )
+        summary = response['choices'][0]['message']['content'].strip()
+        
+        summary_path = Path(base_dir) / "summary.txt"
+        with open(summary_path, 'w', encoding='utf-8') as summary_file:
+            summary_file.write(summary)
+        print(f"Generated summary for podcast script and saved it to {summary_path}")
+
+    except Exception as e:
+        print(f"Error querying OpenAI API: {e}")
+        return None
+
+def small_summarize_podcast_script(script):
+    prompt = f"In a numbered list, summarize the following podcast in an EXTREMELY concise, brief manner. Include only the 4 most juicy, paradigm shifting, or dramatic topics covered. Each bulletpoint should be no more than 6 words! EXTREMELY SHORT BULLET POINTS. Once you think it's too short, make it even shorter. Then, shorter again.:\n\n{script}"
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4o",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=60  # Adjust token limit based on how long you'd like the summary to be
+        )
+        summary = response['choices'][0]['message']['content'].strip()
+        
+        summary_path = Path(base_dir) / "smallsummary.txt"
+        with open(summary_path, 'w', encoding='utf-8') as summary_file:
+            summary_file.write(summary)
+        print(f"Generated summary for podcast script and saved it to {summary_path}")
+
+    except Exception as e:
+        print(f"Error querying OpenAI API: {e}")
+        return None
+
+
+# Step 14: Split podcast script into chunks
 def split_text_into_chunks(text, max_length):
     sentences = re.split(r'(?<=[.!?]) +', text)  # Split by sentence ending
     chunks = []
@@ -201,7 +247,7 @@ def split_text_into_chunks(text, max_length):
 
     return chunks
 
-# Step 14: Split podcast script into chunks and save
+# Step 15: Split podcast script into chunks and save
 def split_and_save_chunks():
     script_file_path = Path(base_dir) / "podcast_script.txt"
 
@@ -222,7 +268,7 @@ def split_and_save_chunks():
 
     print("Text splitting completed successfully.")
 
-# Step 15: Convert podcast script chunks to speech and save as audio
+# Step 16: Convert podcast script chunks to speech and save as audio
 def convert_chunks_to_speech_and_combine():
     script_file_path = Path(base_dir) / "podcast_script.txt"
 
@@ -278,12 +324,12 @@ def convert_chunks_to_speech_and_combine():
     combined_audio.export(combined_audio_file_path, format="mp3")
     print(f"Combined audio saved as: {combined_audio_file_path}")
 
-# Step 16: Setup the directory structure based on query and timestamp
+# Step 17: Setup the directory structure based on query and timestamp
 def setup_directories(query):
     global base_dir, html_dir, text_dir, output_dir, summaries_dir
 
     # Create the directory name from query and timestamp
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
     base_dir = Path(f"{query}_{timestamp}")
     base_dir.mkdir(exist_ok=True)
 
@@ -296,7 +342,7 @@ def setup_directories(query):
     for dir_name in [html_dir, text_dir, output_dir, summaries_dir]:
         Path(dir_name).mkdir(exist_ok=True)
 
-# Step 17: Main process
+# Step 18: Main process
 def main():
     # Parse command line arguments
     parser = argparse.ArgumentParser(description='Fetch news articles from NewsAPI.')
@@ -331,6 +377,7 @@ def main():
         download_html_articles(articles_data)
 
         # Convert HTML to text
+        print("Converting HTML to text...")
         convert_html_to_text()
 
         # Check relevance and move files
@@ -344,11 +391,18 @@ def main():
 
         if aggregated_summaries:
             # Generate podcast script based on aggregated summaries
-            podcast_script = generate_podcast_script(aggregated_summaries)
+            podcast_script = generate_podcast_script(aggregated_summaries, query)
             
             if podcast_script:
                 # Save the podcast script to a file
                 save_podcast_script(podcast_script)
+                
+                # Summarize the podcast script
+                summarize_podcast_script(podcast_script)
+                
+                # Briefly summarize the podcast script
+                
+                small_summarize_podcast_script(podcast_script)
 
                 # Split the podcast script into chunks and save them
                 split_and_save_chunks()
