@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signInWithGoogle, useAuthState } from '../utilities/firebase';
+import logo from '../logo.svg'; // Adjust the path as needed
 
 const Spinner = () => (
     <div className="flex items-center justify-center">
@@ -32,7 +33,7 @@ const SignInForm = () => {
                 style={{ backgroundColor: '#5f6f52' }}
             >
                 <div className="relative z-20 w-full max-w-md text-center flex flex-col items-center">
-                    <img src="https://svgshare.com/i/1BaQ.svg" width={150} alt="Logo" />
+                    <img src={logo} width={300} alt="Logo" />
                     <div className="mt-4">
                         <h3 className="text-white text-3xl font-bold">
                             Transforming News into Engaging Podcasts

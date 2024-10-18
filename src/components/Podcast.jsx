@@ -12,7 +12,7 @@ const Podcast = () => {
       <SignOutNav />
       <div className="flex-grow flex items-center justify-center p-4 bg-gray-800">
         <div className="w-full max-w-lg p-8">
-          <h2 className="text-2xl font-semibold text-white text-center mb-4">{category} Podcast</h2>
+          <h2 className="text-2xl font-semibold text-white text-center mb-4">Your Daily {category} Update</h2>
           <div className="flex justify-center">
             <Player category={category} />
           </div>
