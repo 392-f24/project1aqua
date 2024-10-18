@@ -4,21 +4,27 @@
 
 /* Applying Frank Ruhl Libre to headings */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Frank Ruhl Libre', serif;
-  }
-  
-  /* Applying Fraunces to specific sections */
-  .navbar, .footer {
-    font-family: 'Fraunces', serif;
-  }
-  
-  /* Applying Noto Serif JP to body text */
-  body {
-    font-family: 'Noto Serif JP', serif;
-  }
-  
-  /* Applying SUSE to buttons */
-  .btn {
-    font-family: 'SUSE', sans-serif;
-  }
+  font-family: 'Frank Ruhl Libre', serif;
+}
+
+/* Applying Fraunces to specific sections */
+.navbar, .footer {
+  font-family: 'Fraunces', serif;
+}
+
+/* Applying Noto Serif JP to body text */
+body {
+  font-family: 'Noto Serif JP', serif;
+}
+
+/* Applying SUSE to buttons */
+.btn {
+  font-family: 'SUSE', sans-serif;
+}
+
+.small-summary {
+  font-size: clamp(0.8rem, 1vw + 0.5rem, 1rem); /* Sets a responsive font size */
+  white-space: normal; /* Ensures text wraps correctly */
+  line-height: 1.5;
+}
   
