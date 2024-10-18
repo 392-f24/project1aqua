@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signInWithGoogle, useAuthState } from '../utilities/firebase';
-import logo from '../logo.svg'; // Adjust the path as needed
+import logo from '../logo.svg';
 
 const Spinner = () => (
     <div className="flex items-center justify-center">
@@ -10,7 +10,7 @@ const Spinner = () => (
 );
 
 const SignInForm = () => {
-    const [loading, setLoading] = useState(false); // Loading state
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSignIn = async () => {
@@ -35,46 +35,25 @@ const SignInForm = () => {
                 <p className="text-gray-300 mb-8">
                     Sign up to listen to up-to-date podcasts on the latest news, powered by AI.
                 </p>
-
-                {/* Google Sign-in Button */}
                 {loading ? (
                     <Spinner />
                 ) : (
                     <button
                         onClick={handleSignIn}
-                        className="flex items-center justify-center w-full max-w-sm py-3 rounded-lg text-white shadow-md hover:shadow-lg transition-shadow duration-300"
-                        style={{ backgroundColor: '#FEFAE0', color: '#4a4a4a', fontWeight: 'bold' }}
+                        className="flex items-center justify-center py-3 rounded-lg text-white shadow-md hover:shadow-lg transition-shadow duration-300"
+                        style={{
+                            backgroundColor: '#FEFAE0',
+                            color: '#4a4a4a',
+                            fontWeight: 'bold',
+                            width: '90%', // Adjust width to 90% of its container
+                            maxWidth: '360px', // Maximum width to not be too wide on larger screens
+                        }}
                     >
-                        {/* Google icon SVG */}
-                        <svg
-                            className="w-5 h-5 mr-2"
-                            viewBox="0 0 48 48"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <g clipPath="url(#clip0_17_40)">
-                                <path
-                                    d="M47.532 24.5528C47.532 22.9214 47.3997 21.2811 47.1175 19.6761H24.48V28.9181H37.4434C36.9055 31.8988 35.177 34.5356 32.6461 36.2111V42.2078H40.3801C44.9217 38.0278 47.532 31.8547 47.532 24.5528Z"
-                                    fill="#4285F4"
-                                />
-                                <path
-                                    d="M24.48 48.0016C30.9529 48.0016 36.4116 45.8764 40.3888 42.2078L32.6549 36.2111C30.5031 37.675 27.7252 38.5039 24.4888 38.5039C18.2275 38.5039 12.9187 34.2798 11.0139 28.6006H3.03296V34.7825C7.10718 42.8868 15.4056 48.0016 24.48 48.0016Z"
-                                    fill="#34A853"
-                                />
-                                <path
-                                    d="M11.0051 28.6006C9.99973 25.6199 9.99973 22.3922 11.0051 19.4115V13.2296H3.03298C-0.371021 20.0112 -0.371021 28.0009 3.03298 34.7825L11.0051 28.6006Z"
-                                    fill="#FBBC04"
-                                />
-                                <path
-                                    d="M24.48 9.49932C27.9016 9.44641 31.2086 10.7339 33.6866 13.0973L40.5387 6.24523C36.2 2.17101 30.4414 -0.068932 24.48 0.00161733C15.4055 0.00161733 7.10718 5.11644 3.03296 13.2296L11.005 19.4115C12.901 13.7235 18.2187 9.49932 24.48 9.49932Z"
-                                    fill="#EA4335"
-                                />
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_17_40)">
-                                    <rect width="48" height="48" fill="white" />
-                                </clipPath>
-                            </defs>
+                        <svg className="w-5 h-5 mr-2" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M47.531 24.552c0-1.632-.132-3.272-.415-4.877H24.479v9.242h12.963c-.538 2.98-2.266 5.617-4.797 7.293v6.997h7.734c4.541-4.18 7.152-10.353 7.152-17.655z" fill="#4285F4"/>
+                            <path d="M24.479 48c6.473 0 11.931-2.125 15.909-5.794l-7.734-6.997c-1.634 1.098-3.734 1.746-6.175 1.746-4.264 0-7.873-2.883-9.165-6.762H3.032v6.716C7.106 42.887 15.405 48 24.479 48z" fill="#34A853"/>
+                            <path d="M15.294 28.6a9.986 9.986 0 0 1 0-6.399V15.485H3.033a16.138 16.138 0 0 0 0 14.232l12.261-7.117z" fill="#FBBC05"/>
+                            <path d="M24.479 9.499c3.42-.053 6.727 1.234 9.205 3.598l6.852-6.852C36.199 2.17 30.441-.07 24.479 0 15.405 0 7.106 5.116 3.032 13.23l12.262 6.182c1.292-3.879 4.902-6.762 9.185-6.762z" fill="#EA4335"/>
                         </svg>
                         Sign in with Google
                     </button>
