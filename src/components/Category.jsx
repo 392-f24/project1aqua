@@ -69,7 +69,7 @@ const Category = () => {
 
   return (
     <div className="min-h-screen bg-gray-600">
-      <SignOutNav /> 
+      <SignOutNav />
       <div className="flex flex-col items-center p-6 w-full" style={{ marginTop: 0, paddingTop: '2rem' }}>
         <h2 style={{
           fontSize: 'clamp(1.5rem, 2.5vw + 1rem, 3.5rem)',  // Scalable font size for heading
@@ -80,7 +80,7 @@ const Category = () => {
         }}>
           Choose a Podcast Category
         </h2>
-        <div className="flex flex-wrap gap-8 justify-center">
+        <div className="flex flex-wrap gap-4 justify-center w-full max-w-4xl">
           {/* Sports Button */}
           <button
             className="btn text-black rounded-md hover:bg-blue-600 transition shadow-lg text-left"
@@ -89,14 +89,16 @@ const Category = () => {
               padding: 'clamp(1rem, 2vw + 1rem, 2.5rem)',  // Responsive padding
               fontSize: 'clamp(0.9rem, 1.2vw + 0.5rem, 1.5rem)',  // Scalable font size for text
               whiteSpace: 'normal',  // Allow text to wrap within the button
-              overflowWrap: 'break-word',  // Ensure long words break correctly
+              width: '90%',  // Full width for mobile devices
+              maxWidth: '200px',  // Limit the width on larger screens
               height: 'auto',  // Dynamic height based on content
-              display: 'inline-block',  // Ensure buttons expand based on content
+              overflowWrap: 'break-word',
+              display:'inline-block',
             }}
             onClick={() => handleCategoryClick('Sports')}
           >
-            <span style={{ fontSize: 'clamp(1.5rem, 2vw + 0.5rem, 2.5rem)', fontWeight: 'bold' }}>Sports</span> {/* Larger font for category name */}
-            <pre style={{ textAlign: 'left', marginTop: '10px' }}>{summaries.Sports || 'Loading...'}</pre>
+            <span style={{ fontSize: 'clamp(1.5rem, 2vw + 0.5rem, 2.5rem)', fontWeight: 'bold' }}>Sports</span>
+            <p className="small-summary" style={{ textAlign: 'left', marginTop: '10px' }}>{summaries.Sports || 'Loading...'}</p>
           </button>
 
           {/* Technology Button */}
@@ -107,14 +109,16 @@ const Category = () => {
               padding: 'clamp(1rem, 2vw + 1rem, 2.5rem)',  // Responsive padding
               fontSize: 'clamp(0.9rem, 1.2vw + 0.5rem, 1.5rem)',  // Scalable font size for text
               whiteSpace: 'normal',  // Allow text to wrap within the button
-              overflowWrap: 'break-word',  // Ensure long words break correctly
+              width: '90%',  // Full width for mobile devices
+              maxWidth: '200px',  // Limit the width on larger screens
               height: 'auto',  // Dynamic height based on content
-              display: 'inline-block',  // Ensure buttons expand based on content
+              overflowWrap: 'break-word',
+              display:'inline-block',
             }}
             onClick={() => handleCategoryClick('Technology')}
           >
-            <span style={{ fontSize: 'clamp(1.5rem, 2vw + 0.5rem, 2.5rem)', fontWeight: 'bold' }}>Technology</span> {/* Larger font for category name */}
-            <pre style={{ textAlign: 'left', marginTop: '10px' }}>{summaries.Technology || 'Loading...'}</pre>
+            <span style={{ fontSize: 'clamp(1.5rem, 2vw + 0.5rem, 2.5rem)', fontWeight: 'bold' }}>Technology</span>
+            <p className="small-summary" style={{ textAlign: 'left', marginTop: '10px' }}>{summaries.Technology || 'Loading...'}</p>
           </button>
 
           {/* Music Button */}
@@ -125,14 +129,16 @@ const Category = () => {
               padding: 'clamp(1rem, 2vw + 1rem, 2.5rem)',  // Responsive padding
               fontSize: 'clamp(0.9rem, 1.2vw + 0.5rem, 1.5rem)',  // Scalable font size for text
               whiteSpace: 'normal',  // Allow text to wrap within the button
-              overflowWrap: 'break-word',  // Ensure long words break correctly
+              width: '90%',  // Full width for mobile devices
+              maxWidth: '200px',  // Limit the width on larger screens
               height: 'auto',  // Dynamic height based on content
-              display: 'inline-block',  // Ensure buttons expand based on content
+              overflowWrap: 'break-word',
+              display:'inline-block',
             }}
             onClick={() => handleCategoryClick('Music')}
           >
-            <span style={{ fontSize: 'clamp(1.5rem, 2vw + 0.5rem, 2.5rem)', fontWeight: 'bold' }}>Music</span> {/* Larger font for category name */}
-            <pre style={{ textAlign: 'left', marginTop: '10px' }}>{summaries.Music || 'Loading...'}</pre>
+            <span style={{ fontSize: 'clamp(1.5rem, 2vw + 0.5rem, 2.5rem)', fontWeight: 'bold' }}>Music</span>
+            <p className="small-summary" style={{ textAlign: 'left', marginTop: '10px' }}>{summaries.Music || 'Loading...'}</p>
           </button>
 
           {/* News Button */}
@@ -143,14 +149,16 @@ const Category = () => {
               padding: 'clamp(1rem, 2vw + 1rem, 2.5rem)',  // Responsive padding
               fontSize: 'clamp(0.9rem, 1.2vw + 0.5rem, 1.5rem)',  // Scalable font size for text
               whiteSpace: 'normal',  // Allow text to wrap within the button
-              overflowWrap: 'break-word',  // Ensure long words break correctly
+              width: '90%',  // Full width for mobile devices
+              maxWidth: '200px',  // Limit the width on larger screens
               height: 'auto',  // Dynamic height based on content
-              display: 'inline-block',  // Ensure buttons expand based on content
+              overflowWrap: 'break-word',
+              display:'inline-block',
             }}
             onClick={() => handleCategoryClick('News')}
           >
-            <span style={{ fontSize: 'clamp(1.5rem, 2vw + 0.5rem, 2.5rem)', fontWeight: 'bold' }}>News</span> {/* Larger font for category name */}
-            <pre style={{ textAlign: 'left', marginTop: '10px' }}>{summaries.News || 'Loading...'}</pre>
+            <span style={{ fontSize: 'clamp(1.5rem, 2vw + 0.5rem, 2.5rem)', fontWeight: 'bold' }}>News</span>
+            <p className="small-summary" style={{ textAlign: 'left', marginTop: '10px' }}>{summaries.News || 'Loading...'}</p>
           </button>
         </div>
       </div>
