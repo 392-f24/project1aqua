@@ -38,7 +38,7 @@ const SignInForm = () => {
                             Transforming News into Engaging Podcasts
                         </h3>
                         <p className="text-gray-300 my-4">
-                            Sign up to generate personalized podcast summaries of the latest news articles, powered by AI.
+                            Sign up to listen to up-to-date podcasts on the latest news, powered by AI.
                         </p>
                     </div>
                 </div>
@@ -58,7 +58,7 @@ const SignInForm = () => {
                 <div className="max-w-md p-8 rounded-lg shadow-2xl" style={{ backgroundColor: '#e9c5a2' }}>
                     <h2 className="text-3xl font-bold mb-4 text-gray-800">Welcome Back</h2>
                     <p className="text-lg text-gray-700 mb-8">
-                        Sign in with Google to start generating AI-powered podcast summaries of news articles.
+                        Sign in with Google to start listening to AI-generated podcasts on recent topics.
                     </p>
 
                     {loading ? (
