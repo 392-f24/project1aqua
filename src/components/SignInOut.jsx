@@ -43,7 +43,7 @@ const SignInForm = () => {
                     <button
                         onClick={handleSignIn}
                         className="flex items-center justify-center w-full max-w-sm py-3 rounded-lg text-white shadow-md hover:shadow-lg transition-shadow duration-300"
-                        style={{ backgroundColor: '#6a7f52' }}
+                        style={{ backgroundColor: '#FEFAE0', color: '#4a4a4a', fontWeight: 'bold' }}
                     >
                         {/* Google icon SVG */}
                         <svg
