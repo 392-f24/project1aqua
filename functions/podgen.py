@@ -184,7 +184,7 @@ def save_podcast_script(script):
 
 # Step 13: Summarize podcast script
 def summarize_podcast_script(script):
-    prompt = f"Summarize the following podcast script in a concise manner:\n\n{script}"
+    prompt = f"Summarize the following podcast script in a very brief, concise manner, without using bullet points Just simple text, nothing fancy. Write only one paragraph, and nothing more:\n\n{script}"
     try:
         response = openai.ChatCompletion.create(
             model="gpt-4o-mini",
@@ -192,7 +192,7 @@ def summarize_podcast_script(script):
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": prompt}
             ],
-            max_tokens=1500  # Adjust token limit based on how long you'd like the summary to be
+            max_tokens=500  # Adjust token limit based on how long you'd like the summary to be
         )
         summary = response['choices'][0]['message']['content'].strip()
         
