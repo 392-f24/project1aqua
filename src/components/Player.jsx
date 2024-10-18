@@ -13,6 +13,13 @@ const Player = ({ category }) => {
   const [audioUrl, setAudioUrl] = useState(null); // Set default if no URL
   const audioRef = useRef(null); 
 
+  // Function to format seconds into MM:SS
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`; // Ensure seconds are two digits
+  };
+
   // get most recent podcast in {category}
   useEffect(() => {
     const fetchMostRecentPodcast = async () => {
@@ -121,11 +128,11 @@ const Player = ({ category }) => {
 
   return (
   <div>
-    <div className="flex flex-col items-center p-6 rounded-xl shadow-lg w-full mt-6 bg-gray-600">
+    <div className="flex flex-col items-center p-6 rounded-xl shadow-lg w-full mt-6 bg-[#5F6F52]"> {/* Dark background color similar to category page */}
       {/* Play/Pause Button */}
       <button
         onClick={togglePlayPause}
-        className="mb-4 p-4 bg-gray-600 text-white rounded-full hover:bg-gray-900 transition duration-600 focus:outline-none focus:ring-2 focus:ring-gray-900"
+        className="mb-4 p-4 bg-[#a37914] text-white rounded-full hover:bg-gray-800 transition duration-600 focus:outline-none focus:ring-2 focus:ring-gray-800" // Accent color similar to category page
       >
         {isPlaying ? (
           <i className="fa-regular fa-circle-pause text-3xl"></i>
@@ -142,12 +149,15 @@ const Player = ({ category }) => {
           max="100"
           value={progress}
           onChange={handleProgressChange}
-          className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-white"
+          style={{
+            background: `linear-gradient(to right, #ffffff ${progress}%, #939191 ${progress}%)`, // Fill color as the dot moves
+          }}
+          className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#a37914]" // Accent color for the range input
         />
         {/* Progress Time */}
         <div className="flex justify-between mt-2 text-sm text-gray-300">
-          <span>{Math.floor(audioRef.current?.currentTime || 0)}s</span>
-          <span>{Math.floor(duration)}s</span>
+          <span>{formatTime(audioRef.current?.currentTime || 0)}</span>
+          <span>{formatTime(duration)}</span>
         </div>
       </div>
     </div>
@@ -156,6 +166,5 @@ const Player = ({ category }) => {
   </div>
   );
 };
-
 
 export default Player;
