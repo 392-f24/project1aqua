@@ -90,7 +90,7 @@ const Category = () => {
               fontSize: 'clamp(0.9rem, 1.2vw + 0.5rem, 1.5rem)',  // Scalable font size for text
               whiteSpace: 'normal',  // Allow text to wrap within the button
               width: '90%',  // Full width for mobile devices
-              maxWidth: '200px',  // Limit the width on larger screens
+              maxWidth: '300px',  // Limit the width on larger screens
               height: 'auto',  // Dynamic height based on content
               overflowWrap: 'break-word',
               display:'inline-block',
@@ -110,7 +110,7 @@ const Category = () => {
               fontSize: 'clamp(0.9rem, 1.2vw + 0.5rem, 1.5rem)',  // Scalable font size for text
               whiteSpace: 'normal',  // Allow text to wrap within the button
               width: '90%',  // Full width for mobile devices
-              maxWidth: '200px',  // Limit the width on larger screens
+              maxWidth: '300px',  // Limit the width on larger screens
               height: 'auto',  // Dynamic height based on content
               overflowWrap: 'break-word',
               display:'inline-block',
@@ -130,7 +130,7 @@ const Category = () => {
               fontSize: 'clamp(0.9rem, 1.2vw + 0.5rem, 1.5rem)',  // Scalable font size for text
               whiteSpace: 'normal',  // Allow text to wrap within the button
               width: '90%',  // Full width for mobile devices
-              maxWidth: '200px',  // Limit the width on larger screens
+              maxWidth: '300px',  // Limit the width on larger screens
               height: 'auto',  // Dynamic height based on content
               overflowWrap: 'break-word',
               display:'inline-block',
@@ -150,7 +150,7 @@ const Category = () => {
               fontSize: 'clamp(0.9rem, 1.2vw + 0.5rem, 1.5rem)',  // Scalable font size for text
               whiteSpace: 'normal',  // Allow text to wrap within the button
               width: '90%',  // Full width for mobile devices
-              maxWidth: '200px',  // Limit the width on larger screens
+              maxWidth: '300px',  // Limit the width on larger screens
               height: 'auto',  // Dynamic height based on content
               overflowWrap: 'break-word',
               display:'inline-block',
