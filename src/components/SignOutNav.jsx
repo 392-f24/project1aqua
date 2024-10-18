@@ -1,47 +1,55 @@
 import React from 'react';
-import { signInWithGoogle, signOut, useAuthState } from '../utilities/firebase';
-import { FaUser } from 'react-icons/fa'; 
 import { useNavigate } from 'react-router-dom';
+import logo from '../logo.svg'; // Adjust the path as needed
 
-// Nav Header
-// Displays sign in and sign out links
-
-const SignOutButton = () => (
-    <button
-    className="btn bg-gray-700 text-white py-2 px-4 rounded-md hover:bg-red-600 transition"
-    onClick={signOut}
-    >
-      Sign Out
-    </button>
-);
-  
-const SignInButton = () => {
+export default function SignOutNav({ children }) {
     const navigate = useNavigate();
-    const handleSignIn = async () => {
-        navigate('/'); // nav to sign in page
-      };
-    
+
+    // Function to handle logo click and navigate to /category
+    const handleClick = () => {
+        navigate('/category');
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            handleClick();
+        }
+    };
+
     return (
-        <button
-          className="btn bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-red-600 transition"
-          onClick={handleSignIn}
-        >
-          Sign In
-        </button>
+        <>
+            {/* Container for the logo and background color */}
+            <div
+                style={{
+                    width: '100%',
+                    backgroundColor: '#5F6F52', // Green background color
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    padding: '2rem 0',
+                    zIndex: 1000,
+                }}
+            >
+                {/* The Logo */}
+                <img
+                    src={logo}
+                    alt="Logo"
+                    onClick={handleClick}
+                    onKeyDown={handleKeyDown}
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Click to go to category"
+                    className="logo cursor-pointer"
+                    style={{
+                        width: 'clamp(150px, 10vw + 200px, 450px)', // Exponential-like scaling using clamp
+                        height: 'auto', // Maintain aspect ratio
+                    }}
+                />
+            </div>
+
+            {/* Other Content Below the Logo */}
+            <div style={{ padding: '0 20px' }}>{children}</div>
+        </>
     );
-};
-  
-const AuthButton = () => {
-    const [user] = useAuthState();
-    return user ? <SignOutButton /> : <SignInButton />;
-};
-  
-export default function SignOutNav() {
-    const [user] = useAuthState(); // Get the authentication state
-    return (
-        <div className="flex justify-between items-center bg-white shadow-md p-4">
-            <h1 className="text-lg font-bold">FlashBrief</h1> {/* Title or Logo */}
-            <AuthButton />
-        </div>
-  );
 }
