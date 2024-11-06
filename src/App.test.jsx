@@ -4,6 +4,9 @@ import Category from './components/Category.jsx';
 import { useNavigate } from 'react-router-dom';
 import { MemoryRouter } from 'react-router-dom';
 
+// Set the Firebase project ID from the environment variable
+process.env.FIREBASE_PROJECT_ID = process.env.VITE_FIREBASE_PROJECT_ID;
+
 vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom');
   return {
@@ -27,9 +30,9 @@ describe('Category Component', () => {
 
   it('navigates to the Technology page when Technology category is clicked', () => {
     render(
-        <MemoryRouter>
-          <Category />
-        </MemoryRouter>
+      <MemoryRouter>
+        <Category />
+      </MemoryRouter>
     );
 
     const technologyButton = screen.getByText(/Technology/i);
@@ -43,9 +46,9 @@ describe('Category Component', () => {
 
   it('renders a summary under the Technology category button', async () => {
     render(
-        <MemoryRouter>
-          <Category />
-        </MemoryRouter>
+      <MemoryRouter>
+        <Category />
+      </MemoryRouter>
     );
 
     const technologyButton = screen.getByText(/Technology/i);
