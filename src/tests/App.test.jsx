@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
-import Category from './components/Category.jsx';
+import Category from '../components/Category.jsx';
 import { useNavigate } from 'react-router-dom';
 import { MemoryRouter } from 'react-router-dom';
 

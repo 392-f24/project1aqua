@@ -131,6 +131,7 @@ const Player = ({ category }) => {
     <div className="flex flex-col items-center p-6 rounded-xl shadow-lg w-full mt-6 bg-[#5F6F52]"> {/* Dark background color similar to category page */}
       {/* Play/Pause Button */}
       <button
+        aria-label="Play"
         onClick={togglePlayPause}
         className="mb-4 p-4 bg-[#a37914] text-white rounded-full hover:bg-gray-800 transition duration-600 focus:outline-none focus:ring-2 focus:ring-gray-800" // Accent color similar to category page
       >
